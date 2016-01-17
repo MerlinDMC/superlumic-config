@@ -5,7 +5,7 @@
 
   tasks:
     - name: install personal cask applications
-      homebrew_cask: name={{item}} state=present
+      homebrew_cask: name={{ item }} state=present
       with_items:
         - spotify
         - istat-menus
@@ -23,23 +23,18 @@
     - name: create ssh directory
       become: yes
       file:
-        path: "{{item}}"
+        path: "{{ item }}"
         state: directory
-        owner: root
-        group: wheel
-        mode: 0777
+        owner: "{{ ansible_user_id }}"
+        group: staff
+        mode: 0700
       with_items:
-        - /etc/ssh
-    - name: personal ssh config
-      become: yes
-      copy:
-        src: files/ssh_config
-        dest: /etc/ssh_config
+        - "{{ ansible_user_dir }}/.ssh"
     - name: personal ssh config in another location
       become: yes
       copy:
         src: files/ssh_config
-        dest: /etc/ssh/ssh_config
+        dest: "{{ ansible_user_dir }}/.ssh/config"
     - name: add to sudoers without password
       become: yes
       lineinfile: >
@@ -49,16 +44,16 @@
         state=present
         create=true
       with_items:
-        - { regexp: '^roderik', line: 'roderik ALL=(ALL) NOPASSWD: ALL' }
+        - { regexp: "^{{ ansible_user_id }}", line: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL" }
 
   roles:
     - profile-all
     - profile-developer
 
   vars:
-    - computername: spectr
-    - git_user_name: Roderik van der Veer
-    - git_user_email: roderik.van.der.veer@kunstmaan.be
+    - computername: example
+    - git_user_name: Superlumic Example
+    - git_user_email: example@superlumic.com
     - php_version: 70
     - sublime_packages:
         - dest: "SideBarEnhancements"
