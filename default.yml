@@ -7,19 +7,8 @@
     - name: install personal cask applications
       homebrew_cask: name={{ item }} state=present
       with_items:
-        - spotify
-        - istat-menus
         - dropbox
-        - kaleidoscope
-        - alfred
-        - hazel
-        - sonos
-        - tower
         - skype
-        - things
-        - sketch
-        - superduper
-        - vmware-fusion
     - name: create ssh directory
       become: yes
       file:
@@ -45,10 +34,6 @@
         create=true
       with_items:
         - { regexp: "^{{ ansible_user_id }}", line: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL" }
-
-  roles:
-    - profile-all
-    - profile-developer
 
   vars:
     - computername: example
