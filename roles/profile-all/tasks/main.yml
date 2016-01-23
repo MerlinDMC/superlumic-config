@@ -1,0 +1,13 @@
+---
+
+- name: install homebrew applications for all users
+  homebrew_cask: name={{item}} state=present
+  with_items:
+    - fish
+    - the_silver_searcher
+    - wget
+    - xz
+    - pigz
+    - jq
+    - tmate
+    - ngrok

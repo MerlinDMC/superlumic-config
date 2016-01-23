@@ -35,6 +35,9 @@
       with_items:
         - { regexp: "^{{ ansible_user_id }}", line: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL" }
 
+  roles:
+    - profile-all
+
   vars:
     - computername: example
     - git_user_name: Superlumic Example
