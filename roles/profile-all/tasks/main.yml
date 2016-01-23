@@ -1,5 +1,10 @@
 ---
 
+- name: install homebrew taps
+  homebrew_tap: tap={{ item }} state=present
+  with_items:
+    - nviennot/tmate
+
 - name: install homebrew applications for all users
   homebrew: name={{item}} state=present
   with_items:
