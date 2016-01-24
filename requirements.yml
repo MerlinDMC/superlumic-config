@@ -1,7 +1,7 @@
 ---
 
 - src: https://github.com/MerlinDMC/ansible-role-homebrew.git
-  name: superlumic.superlumic-homebrew
+  name: MerlinDMC.superlumic-homebrew
 
 - src: https://github.com/superlumic/ansible-role-computername.git
   name: roderik.superlumic-computername

@@ -11,5 +11,5 @@ galaxy_info:
   categories:
     - system
 dependencies:
-  - superlumic.superlumic-homebrew
+  - MerlinDMC.superlumic-homebrew
   - roderik.superlumic-computername
