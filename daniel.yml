@@ -1,0 +1,70 @@
+---
+
+- hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - name: create ssh directory
+      become: yes
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ ansible_user_id }}"
+        group: staff
+        mode: 0700
+      with_items:
+        - "{{ ansible_user_dir }}/.ssh"
+    - name: personal ssh config in another location
+      become: yes
+      copy:
+        src: files/ssh_config
+        dest: "{{ ansible_user_dir }}/.ssh/config"
+
+  roles:
+    - profile-all
+    - profile-developer
+
+  vars:
+    - git_user_name: Daniel Malon
+    - git_user_email: daniel.malon@me.com
+    - osx_defaults:
+      - domain: 'com.apple.dock'
+        key: 'autohide'
+        type: boolean
+        value: 'true'
+      - domain: 'com.apple.dock'
+        key: 'minimize-to-application'
+        type: integer
+        value: 1
+      - domain: 'com.apple.dock'
+        key: 'show-process-indicators'
+        type: boolean
+        value: 'true'
+      - domain: 'com.apple.screencapture'
+        key: 'type'
+        type: string
+        value: png
+      - domain: 'com.apple.menuextra.battery'
+        key: 'ShowPercent'
+        type: string
+        value: 'YES'
+      - domain: 'com.apple.finder'
+        key: 'FXPreferredViewStyle'
+        type: string
+        value: "clmv"
+      - domain: 'NSGlobalDomain'
+        key: 'NSNavPanelExpandedStateForSaveMode'
+        type: boolean
+        value: 'true'
+      - domain: 'com.apple.dock'
+        key: 'tilesize'
+        type: float
+        value: 32
+      - domain: 'com.apple.desktopservices'
+        key: 'DSDontWriteNetworkStores'
+        type: boolean
+        value: 'true'
+      - domain: 'com.apple.Safari'
+        key: 'IncludeDevelopMenu'
+        type: boolean
+        value: 'true'
